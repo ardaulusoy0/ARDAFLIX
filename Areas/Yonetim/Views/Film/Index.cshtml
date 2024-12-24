@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Areas/Yonetim/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Film Listesi</h2>
+            <div class="filmList"></div>
+        </div>
+    </div>
+</div>
+@section myScripts {
+    <script>
+        $(document).ready(function () {
+            FilmListele();
+        });
+
+        FilmListele = function() {
+
+            let spinner = "<div class='spinner-border text-primary' role='status'><span class='sr-only'>Yükleniyor...</span></div>";
+            $(".filmList").html(spinner);
+
+            $.ajax({
+                url: "@Url.Action("List", "Film")",
+                type: "GET",
+                success: function (data) {
+                    $(".filmList").html(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+
+        showModal = function(url) {
+            $(".modal").modal("show");
+            $(".modal-dialog").load(url);
+        }
+
+        filmSubmit = function (e, form) {
+            e.preventDefault();
+
+            $.ajax({
+                method: "POST",
+                processData: false,
+                contentType: false,
+                data: new FormData(form),
+                url: form.action,
+                success: function () {
+                    $("#exampleModal").modal("hide")
+                    FilmListele();
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            })
+        }
+
+    </script>
+}
+
+<div class="modal modal-fade" tabindex="-1" id="exampleModal" aria-hidden="true">
+    <div class="modal-dialog">
+
+    </div>
+</div>

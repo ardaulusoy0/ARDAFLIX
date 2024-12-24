@@ -1,0 +1,32 @@
+﻿@using Deneme1.Models.Film;
+@using Deneme1.Models.Tur;
+@model List<Film>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home";
+}
+<section class="mainFilms">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="~/Content/Images/resim.jpg" class="w-100 rounded-top" alt="Alternate Text" />
+                    </div>
+                    <div class="card-header">@item.Ad</div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center" align="center">
+                            <span class="mx-1 bg-success rounded text-white small fw-semibold p-1 px-4">@{ var tur = TurDatas.Items.FirstOrDefault(x => x.Id == item.Tur); } @tur.Ad </span>
+                        </div>
+                        <span align="center" class="mx-1 text-dark small fw-bolder p-1 d-block mt-2">@item.Yonetmen</span>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+

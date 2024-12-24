@@ -1,0 +1,38 @@
+﻿@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg mx-5 px-5 my-5 rounded-5 bg-body-secondary">
+        <div class="container-fluid">
+            <a href="@Url.Action("Index","Dashboard")" class="navbar-brand text-danger">ARDAFLIX</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menum">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menum">
+                <ul class="nav">
+                    <li class="nav-item"><a href="@Url.Action("Index", "Film")" class="nav-link text-dark">Filmler</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+
+    @RenderSection("myScripts", false)
+</body>
+</html>

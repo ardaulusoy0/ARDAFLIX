@@ -1,0 +1,30 @@
+﻿@using Deneme1.Models.Film;
+@using Deneme1.Models.Tur;  
+@model List<Film>
+
+<table class="table table-responsive-md  table-hover table-striped">
+    <tr>
+        <th>Film Adı</th>
+        <th>Yönetmen</th>
+        <th>Yapım Yılı</th>
+        <th>İşlemler</th>
+        <th>
+            <button class="btn btn-sm btn-success my-1 w-100" onclick="showModal('@Url.Action("FilmEkleGuncelle", "Film")')">Ekle</button>
+        </th>
+    </tr>
+    @if(Model != null) { 
+    
+    foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ad</td>
+                <td>@item.Yonetmen</td>
+                <td>@{ var tur = TurDatas.Items.FirstOrDefault(x => x.Id == item.Tur); } @tur.Ad</td>
+                <td>
+                    <button onclick="showModal('@Url.Action("FilmEkleGuncelle", "Film", new { id = item.Id })')" class="btn btn-primary">Düzenle</button>
+                    <button onclick="showModal('@Url.Action("FilmSil", "Film", new { id = item.Id })')" class="btn btn-danger">Sil</button>
+                </td>
+                <td></td>
+            </tr>
+        }}
+</table>

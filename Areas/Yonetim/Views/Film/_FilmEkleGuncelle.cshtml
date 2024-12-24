@@ -1,0 +1,48 @@
+﻿@using Deneme1.Models.Film
+@using Deneme1.Models.Tur
+@model Film
+<div class="modal-content">
+    <div class="modal-header">
+        @if (Model == null)
+        {
+        <p>Kayıt bulunamadı.</p>
+        }
+        <h1 class="modal-title">
+            @if (Model == null)
+            {
+                <span>Film Ekle</span>
+            }
+            else
+            {
+                <span>Film Güncelle</span>
+            }
+        </h1>
+    </div>
+    @using (Html.BeginForm("Kaydet", "Film", FormMethod.Post, new { onsubmit = "filmSubmit(event, this)" }))
+    {
+        @Html.HiddenFor(x => x.Id)
+        <div class="model-body  px-4">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label class="col-form-label">Film Adı:</label>
+                        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3">
+                        <label class="col-form-label">Film Kategori:</label>
+                        @Html.DropDownListFor(x => x.Tur, new SelectList(TurDatas.Items, "Id", "Ad"), new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3">
+                        <label class="col-form-label">Yönetmen:</label>
+                        @Html.TextBoxFor(x => x.Yonetmen, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="model-footer  px-4 mb-3">
+            <button class="btn btn-block btn-success" type="submit">Kaydet</button>
+            <button class="btn btn-block btn-danger" data-bs-dismiss="modal" type="button">İptal</button>
+        </div>
+    }
+</div>
